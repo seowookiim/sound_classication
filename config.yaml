@@ -1,0 +1,73 @@
+data:
+  root: /home/work/KSW/sound_classification/train_2
+
+  index_csv: /home/work/KSW/sound_classification/data/index.csv
+  train_csv: /home/work/KSW/sound_classification/data/train.csv
+  val_csv: /home/work/KSW/sound_classification/data/val.csv
+  audio_ext: ".wav"
+  sample_rate: 16000
+  clip_seconds: 10         # 오디오 길이 (논문들은 보통 10초 사용)
+  num_workers: 4
+
+model:
+# STFT parameter
+  n_mels: 128  # mel bins
+  n_fft: 1024
+  hop_length: 256
+  win_length: 1024   # window 추가  #win_length를 명시하지 않을 경우 win_length가 n_fft 값으로 들어감
+
+train:
+  seed: 42
+  val_split: 0.2
+  batch_size: 4    # server 64
+  epochs: 100
+  lr: 0.001
+  alpha: 0.2
+  beta: 0.2
+  weight_decay: 0.0001
+  log_interval: 10
+  device: "auto"
+
+labels:
+  # ======= 별명 목록 ======= 
+  aliases:
+    "slap": "slap_smack"
+    "crying": "crying_sobbing_wail"
+    "stone": "stone_rock"
+  # ========================
+  # 사용자가 제공한 Target 리스트
+  target:
+    - "asking_help"
+    - "plastic"
+    - "rub"
+    - "whistling"
+    - "slap_smack"
+    - "cough"
+    - "scratch"
+    - "wood"
+    - "sniff"
+    - "stone_rock"
+    - "metal"
+    - "glass"
+    - "sneeze"
+    - "crying_sobbing_wail"
+    - "telephone_bell"
+    - "whispering"
+    - "snoring"
+    - "screaming"
+
+  # 사용자가 제공한 Non-target 리스트
+  non_target:
+    - "cat"
+    - "dog"
+    - "driving"
+    - "engine"
+    - "heavy_equipment"
+    - "klaxon"
+    - "rain"
+    - "safety_alarm"
+    - "siren"
+    - "thunder"
+    - "tools"
+    - "water"
+    - "wind"
